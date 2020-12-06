@@ -15,7 +15,9 @@ limitations under the License.
 */
 package main
 
-import "github.com/jasonBirchall/crypto-tracker/cmd"
+import (
+	"github.com/jasonBirchall/crypto-tracker/cmd"
+)
 
 func main() {
 	cmd.Execute()
