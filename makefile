@@ -15,7 +15,7 @@ run-tracker:
 	go run main.go track
 
 test:
-	go test ./...
+	go test -v ./...
 
 fmt:
 	gofmt -l -s -w ./
