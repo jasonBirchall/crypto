@@ -19,7 +19,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math"
 	"net/http"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/m7shapan/njson"
@@ -83,7 +86,7 @@ func queryApi() ([]byte, error) {
 	return body, nil
 }
 
-func grabPrice(body []byte) (string, error) {
+func grabPrice(body []byte) (float64, error) {
 	var c Coin
 
 	err := njson.Unmarshal([]byte(body), &c)
@@ -91,7 +94,19 @@ func grabPrice(body []byte) (string, error) {
 		log.Fatal(err)
 	}
 
-	return c.Rate, nil
+	// Remove all commas from string
+	res1 := strings.ReplaceAll(c.Rate, ",", "")
+
+	// Convert string to float64
+	v, err := strconv.ParseFloat(res1, 64)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Round the pennies up
+	r := math.Round(v)
+
+	return r, nil
 }
 
 func init() {
