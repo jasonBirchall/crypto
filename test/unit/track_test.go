@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-const mainGo = "../main.go"
+const mainGo = "../../main.go"
 
 func TestCheckCoins(t *testing.T) {
 
