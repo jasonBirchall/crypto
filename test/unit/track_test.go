@@ -18,7 +18,7 @@ func TestCheckCoins(t *testing.T) {
 
 	actual := string(out)
 
-	matched, err := regexp.MatchString(`Bitcoin`, actual)
+	matched, err := regexp.MatchString(`:`, actual)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -37,22 +37,34 @@ var trackCmd = &cobra.Command{
 	Use:   "track",
 	Short: "Allows you to track the rise and fall of specific coins",
 
-	// Args: cobra.MinimumNArgs(1),
-	Run: checkCoins,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		coinName, err := cmd.Flags().GetString("coin")
+		if err != nil {
+			return err
+		}
+
+		price, err := checkCoins(coinName)
+		if err != nil {
+			return err
+		}
+
+		fmt.Println(coinName+":", price)
+		return nil
+	},
 }
 
-func checkCoins(cmd *cobra.Command, args []string) {
+func checkCoins(c string) (float64, error) {
 	data, err := queryApi()
 	if err != nil {
-		log.Fatalln(err)
+		return -1, err
 	}
 
 	price, err := grabPrice(data)
 	if err != nil {
-		log.Fatal(err)
+		return -1, err
 	}
 
-	fmt.Println("Bitcoin:", price)
+	return price, nil
 }
 
 func queryApi() ([]byte, error) {
@@ -111,6 +123,8 @@ func grabPrice(body []byte) (float64, error) {
 
 func init() {
 	rootCmd.AddCommand(trackCmd)
+	trackCmd.Flags().StringP("coin", "c", "bitcoin", "You must specify a coin (required)")
+	trackCmd.MarkPersistentFlagRequired("coin")
 
 	// Here you will define your flags and configuration settings.
 
