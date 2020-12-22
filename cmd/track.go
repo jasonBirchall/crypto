@@ -32,8 +32,6 @@ type Coin struct {
 	Rate string `njson:"data.coins.0.price"`
 }
 
-const apiUrl = "https://api.coinranking.com/v1/public/coins?prefix=btc&base=gbp"
-
 var trackCmd = &cobra.Command{
 	Use:   "track",
 	Short: "Allows you to track the rise and fall of specific coins",
@@ -49,13 +47,13 @@ var trackCmd = &cobra.Command{
 			return err
 		}
 
-		fmt.Println(coinName+":", price)
+		fmt.Println(price)
 		return nil
 	},
 }
 
 func checkCoins(c string) (float64, error) {
-	data, err := queryApi()
+	data, err := queryApi(c)
 	if err != nil {
 		return -1, err
 	}
@@ -68,7 +66,8 @@ func checkCoins(c string) (float64, error) {
 	return price, nil
 }
 
-func queryApi() ([]byte, error) {
+func queryApi(c string) ([]byte, error) {
+	apiUrl := "https://api.coinranking.com/v1/public/coins?base=gbp&prefix=" + c
 	client := http.Client{
 		Timeout: time.Second * 2,
 	}
