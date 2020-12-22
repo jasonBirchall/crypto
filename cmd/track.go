@@ -22,7 +22,6 @@ import (
 	"math"
 	"net/http"
 	"strconv"
-	"strings"
 	"time"
 
 	"github.com/m7shapan/njson"
@@ -30,7 +29,7 @@ import (
 )
 
 type Coin struct {
-	Rate string `njson:"bpi.GBP.rate"`
+	Rate string `njson:"data.coins.0.price"`
 }
 
 var trackCmd = &cobra.Command{
@@ -48,13 +47,13 @@ var trackCmd = &cobra.Command{
 			return err
 		}
 
-		fmt.Println(coinName+":", price)
+		fmt.Println(price)
 		return nil
 	},
 }
 
 func checkCoins(c string) (float64, error) {
-	data, err := queryApi()
+	data, err := queryApi(c)
 	if err != nil {
 		return -1, err
 	}
@@ -67,14 +66,13 @@ func checkCoins(c string) (float64, error) {
 	return price, nil
 }
 
-func queryApi() ([]byte, error) {
-	url := "https://api.coindesk.com/v1/bpi/currentprice.json"
-
+func queryApi(c string) ([]byte, error) {
+	apiUrl := "https://api.coinranking.com/v1/public/coins?base=gbp&prefix=" + c
 	client := http.Client{
 		Timeout: time.Second * 2,
 	}
 
-	req, err := http.NewRequest(http.MethodGet, url, nil)
+	req, err := http.NewRequest(http.MethodGet, apiUrl, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -106,17 +104,14 @@ func grabPrice(body []byte) (float64, error) {
 		log.Fatal(err)
 	}
 
-	// Remove all commas from string
-	res1 := strings.ReplaceAll(c.Rate, ",", "")
-
 	// Convert string to float64
-	v, err := strconv.ParseFloat(res1, 64)
+	v, err := strconv.ParseFloat(c.Rate, 64)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Round the pennies up
-	r := math.Round(v)
+	// Round the pennies to the nearest
+	r := math.Round(v*100) / 100
 
 	return r, nil
 }
