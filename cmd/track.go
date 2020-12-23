@@ -42,14 +42,20 @@ var trackCmd = &cobra.Command{
 			return err
 		}
 
-		price, err := checkCoins(coinName)
-		if err != nil {
-			return err
-		}
+		rtnPrice(coinName)
 
-		fmt.Println(price)
 		return nil
 	},
+}
+
+func rtnPrice(c string) (float64, error) {
+	price, err := checkCoins(c)
+	if err != nil {
+		return -1, err
+	}
+
+	fmt.Println(price)
+	return price, nil
 }
 
 func checkCoins(c string) (float64, error) {
