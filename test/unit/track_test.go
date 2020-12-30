@@ -1,11 +1,9 @@
 package test
 
 import (
-	"encoding/binary"
-	"fmt"
 	"log"
-	"math"
 	"os/exec"
+	"regexp"
 	"testing"
 )
 
@@ -18,12 +16,14 @@ func TestCheckCoins(t *testing.T) {
 		log.Fatal(err)
 	}
 
-	// actual, _ := strconv.ParseFloat(out, 64)
-	bits := binary.LittleEndian.Uint64(out)
-	actual := math.Float64bits(bits)
-	fmt.Printf("%T", actual)
+	actual := string(out)
 
-	if actual < "" {
+	matched, err := regexp.MatchString(`.`, actual)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if !matched {
 		t.Error("Expected output does not match actual. Actual:", actual)
 	}
 }
