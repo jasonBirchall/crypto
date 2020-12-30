@@ -29,7 +29,8 @@ import (
 )
 
 type Coin struct {
-	Rate string `njson:"data.coins.0.price"`
+	Rate   string  `njson:"data.coins.0.price"`
+	Change float64 `njson:"data.coins.0.change"`
 }
 
 var trackCmd = &cobra.Command{
@@ -42,28 +43,28 @@ var trackCmd = &cobra.Command{
 			return err
 		}
 
-		price, err := checkCoins(coinName)
+		price, change, err := checkCoins(coinName)
 		if err != nil {
 			return err
 		}
 
-		fmt.Println(price)
+		fmt.Println("£", price, "|", change, "%")
 		return nil
 	},
 }
 
-func checkCoins(c string) (float64, error) {
+func checkCoins(c string) (float64, float64, error) {
 	data, err := queryApi(c)
 	if err != nil {
-		return -1, err
+		return -1, -1, err
 	}
 
-	price, err := grabPrice(data)
+	price, change, err := grabPrice(data)
 	if err != nil {
-		return -1, err
+		return -1, -1, err
 	}
 
-	return price, nil
+	return price, change, nil
 }
 
 func queryApi(c string) ([]byte, error) {
@@ -96,7 +97,7 @@ func queryApi(c string) ([]byte, error) {
 	return body, nil
 }
 
-func grabPrice(body []byte) (float64, error) {
+func grabPrice(body []byte) (float64, float64, error) {
 	var c Coin
 
 	err := njson.Unmarshal([]byte(body), &c)
@@ -113,7 +114,7 @@ func grabPrice(body []byte) (float64, error) {
 	// Round the pennies to the nearest
 	r := math.Round(v*100) / 100
 
-	return r, nil
+	return r, c.Change, nil
 }
 
 func init() {
