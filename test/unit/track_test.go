@@ -11,14 +11,14 @@ const mainGo = "../../main.go"
 
 func TestCheckCoins(t *testing.T) {
 
-	out, err := exec.Command("go", "run", mainGo, "track").Output()
+	out, err := exec.Command("go", "run", mainGo, "track", "-c", "btc,eth").Output()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	actual := string(out)
 
-	matched, err := regexp.MatchString(`.`, actual)
+	matched, err := regexp.MatchString(`£`, actual)
 	if err != nil {
 		log.Fatal(err)
 	}
