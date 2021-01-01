@@ -19,7 +19,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"math"
 	"net/http"
 	"strconv"
 	"time"
@@ -43,28 +42,28 @@ var trackCmd = &cobra.Command{
 			return err
 		}
 
-		price, change, err := checkCoins(coinName)
+		price, err := checkCoins(coinName)
 		if err != nil {
 			return err
 		}
 
-		fmt.Println("£", price, "|", change, "%")
+		fmt.Println(price + "% ")
 		return nil
 	},
 }
 
-func checkCoins(c string) (float64, float64, error) {
+func checkCoins(c string) (string, error) {
 	data, err := queryApi(c)
 	if err != nil {
-		return -1, -1, err
+		return "An error has occured queying the API:", err
 	}
 
-	price, change, err := grabPrice(data)
+	price, err := grabPrice(data)
 	if err != nil {
-		return -1, -1, err
+		return "An error has occurred grabbing the json object:", err
 	}
 
-	return price, change, nil
+	return price, nil
 }
 
 func queryApi(c string) ([]byte, error) {
@@ -97,7 +96,7 @@ func queryApi(c string) ([]byte, error) {
 	return body, nil
 }
 
-func grabPrice(body []byte) (float64, float64, error) {
+func grabPrice(body []byte) (string, error) {
 	var c Coin
 
 	err := njson.Unmarshal([]byte(body), &c)
@@ -105,16 +104,15 @@ func grabPrice(body []byte) (float64, float64, error) {
 		log.Fatal(err)
 	}
 
-	// Convert string to float64
+	// Convert string to float64 to show two decimal places only.
 	v, err := strconv.ParseFloat(c.Rate, 64)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Round the pennies to the nearest
-	r := math.Round(v*100) / 100
+	s := fmt.Sprintf("£%.2f | %.2f", v, c.Change)
 
-	return r, c.Change, nil
+	return s, nil
 }
 
 func init() {
