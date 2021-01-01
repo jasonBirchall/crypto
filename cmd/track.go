@@ -32,22 +32,22 @@ type Coin struct {
 	Change float64 `njson:"data.coins.0.change"`
 }
 
+var coinsArg []string
+
 var trackCmd = &cobra.Command{
 	Use:   "track",
 	Short: "Allows you to track the rise and fall of specific coins",
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		coinName, err := cmd.Flags().GetString("coin")
-		if err != nil {
-			return err
+		for _, v := range coinsArg {
+			price, err := checkCoins(v)
+			if err != nil {
+				return err
+			}
+
+			fmt.Print(price + "%  ")
 		}
 
-		price, err := checkCoins(coinName)
-		if err != nil {
-			return err
-		}
-
-		fmt.Println(price + "% ")
 		return nil
 	},
 }
@@ -117,7 +117,7 @@ func grabPrice(body []byte) (string, error) {
 
 func init() {
 	rootCmd.AddCommand(trackCmd)
-	trackCmd.Flags().StringP("coin", "c", "bitcoin", "You must specify a coin (required)")
+	trackCmd.Flags().StringSliceVarP(&coinsArg, "coin", "c", []string{}, "")
 	trackCmd.MarkPersistentFlagRequired("coin")
 
 	// Here you will define your flags and configuration settings.
