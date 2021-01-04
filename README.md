@@ -1,4 +1,4 @@
-# Polybar Crypto Tracker
+# Crypto Tracker: Cryptocurrency coin tracking from the command-line
 
 [![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org)
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/jasonbirchall/crypto-tracker.svg)](https://github.com/jasonbirchall/crypto-tracker)
@@ -6,7 +6,7 @@
 [![GitHub release](https://img.shields.io/github/release/jasonbirchall/crypto-tracker.svg)](https://GitHub.com/jasonbirchall/crypto-tracker/releases/)
 [![GitHub issues](https://img.shields.io/github/issues/jasonbirchall/crypto-tracker.svg)](https://GitHub.com/jasonbirchall/crypto-tracker/issues/)
 
-Crypto-tracker is a command-line tool to provide a simple, robust application to display the price of popular crypto currency written in Go. 
+Crypto-tracker is a simple, robust command-line application that displays the price of popular crypto currencies.
 
 ## Install
 
