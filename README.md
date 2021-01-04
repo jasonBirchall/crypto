@@ -1,5 +1,5 @@
 <p align="center">
-  <h3 align="center">Crypto Tracker</h3>
+  <h2 align="center">Crypto Tracker</h2>
   <p align="center">Cryptocurrency coin tracker written in Go</p>
 </p>
 
