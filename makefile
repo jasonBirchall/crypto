@@ -12,7 +12,7 @@ crypto-tracker: $(SOURCE_FILES)
 	GIT_COMMIT=$$(git rev-list -1 HEAD) && CGO_ENABLED=0 go build  -ldflags "-s -w -X github.com/jasonbirchall/crypto-tracker/pkg/version.REVISION=$(GIT_COMMIT)" -a -o ./crypto ./main.go
 
 run-tracker:
-	go run main.go track
+	go run main.go track --coin btc,eth
 
 test:
 	go test -v ./...
