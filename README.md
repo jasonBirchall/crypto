@@ -10,6 +10,7 @@
 [![GoReportCard example](https://goreportcard.com/badge/github.com/jasonbirchall/crypto-tracker)](https://goreportcard.com/report/github.com/jasonbirchall/crypto-tracker)
 [![GitHub release](https://img.shields.io/github/release/jasonbirchall/crypto-tracker.svg)](https://GitHub.com/jasonbirchall/crypto-tracker/releases/)
 [![GitHub issues](https://img.shields.io/github/issues/jasonbirchall/crypto-tracker.svg)](https://GitHub.com/jasonbirchall/crypto-tracker/issues/)
+[![Test status](https://github.com/jasonbirchall/crypto-tracker//workflows/Run%20Tests/badge.svg)](https://github.com/jasonBirchall/crypto-tracker/actions?query=workflow%3A%22Run+Tests%22)
 
 Crypto-tracker is a simple, robust command-line application that displays the price of popular cryptocurrencies.
 
