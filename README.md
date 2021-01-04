@@ -1,4 +1,9 @@
-# Crypto Tracker: Cryptocurrency coin tracker written in Go
+<p align="center">
+  <h3 align="center">Crypto Tracker</h3>
+  <p align="center">Cryptocurrency coin tracker written in Go</p>
+</p>
+
+---
 
 [![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org)
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/jasonbirchall/crypto-tracker.svg)](https://github.com/jasonbirchall/crypto-tracker)
