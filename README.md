@@ -1,4 +1,4 @@
-# Crypto Tracker: Cryptocurrency coin tracking from the command-line
+# Crypto Tracker: Cryptocurrency coin tracker written in Go
 
 [![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org)
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/jasonbirchall/crypto-tracker.svg)](https://github.com/jasonbirchall/crypto-tracker)
@@ -6,7 +6,7 @@
 [![GitHub release](https://img.shields.io/github/release/jasonbirchall/crypto-tracker.svg)](https://GitHub.com/jasonbirchall/crypto-tracker/releases/)
 [![GitHub issues](https://img.shields.io/github/issues/jasonbirchall/crypto-tracker.svg)](https://GitHub.com/jasonbirchall/crypto-tracker/issues/)
 
-Crypto-tracker is a simple, robust command-line application that displays the price of popular crypto currencies.
+Crypto-tracker is a simple, robust command-line application that displays the price of popular cryptocurrencies.
 
 ## Install
 
@@ -15,12 +15,12 @@ computer, please amend the steps appropriately.
 
 Please substitute the latest release number. You can see the latest release
 number in the badge near the top of this page, and all available releases on
-[this page][github ui].
+[this page](https://github.com/jasonBirchall/crypto-tracker/releases/).
 
-```
-RELEASE=0.1.0
-wget https://github.com/jasonbirchall/crypto-tracker/releases/download/${RELEASE}/crypto-tracker-${RELEASE}.zip
-tar xzvf crypto-tracker-${RELEASE}.zip
+```bash
+export RELEASE=0.1.4
+wget https://github.com/jasonbirchall/crypto-tracker/releases/download/${RELEASE}/crypto-tracker_${RELEASE}_linux_amd64.tar.gz
+tar xzvf crypto-tracker_${RELEASE}_linux_amd64.tar.gz
 mv crypto /usr/local/bin/
 ```
 
