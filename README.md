@@ -34,7 +34,7 @@ mv crypto /usr/local/bin/
 
 Crypto-tracker will eventually have a number of subcommands. Execute: `crypto --help` in order to check them out.
 
-#### track
+#### Track
 
 Track was initially intended for something like [Polybar for i3](https://github.com/polybar/polybar) to display the price of certain coins and their rise/fall in the past five minutes. It is inspired by [polybar-crypto](https://github.com/willHol/polybar-crypto).
 
@@ -48,3 +48,16 @@ The track sub-command has a flag that needs to be set. The --coin, or -c for sho
 
 ### Develop
 
+You will need Go installed (version 1.15 or greater).
+
+#### Build locally
+
+Run `make` to create a `crypto` binary.
+
+#### Testing
+
+Run `make test` to run the unit tests.
+
+#### Updating / Publishing
+
+Update the `pkg/version.go` with the tag version and then run `make release`, which creates the release using [GoReleaser](https://github.com/goreleaser/goreleaser).
