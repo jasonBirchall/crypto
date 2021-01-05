@@ -10,11 +10,11 @@
 [![GoReportCard example](https://goreportcard.com/badge/github.com/jasonbirchall/crypto-tracker)](https://goreportcard.com/report/github.com/jasonbirchall/crypto-tracker)
 [![GitHub release](https://img.shields.io/github/release/jasonbirchall/crypto-tracker.svg)](https://GitHub.com/jasonbirchall/crypto-tracker/releases/)
 [![GitHub issues](https://img.shields.io/github/issues/jasonbirchall/crypto-tracker.svg)](https://GitHub.com/jasonbirchall/crypto-tracker/issues/)
-[![Test status](https://github.com/jasonbirchall/crypto-tracker//workflows/Run%20Tests/badge.svg)](https://github.com/jasonBirchall/crypto-tracker/actions?query=workflow%3A%22Run+Tests%22)
+[![tests](https://github.com/jasonbirchall/crypto-tracker//workflows/Run%20Tests/badge.svg)](https://github.com/jasonBirchall/crypto-tracker/actions?query=workflow%3A%22Run+Tests%22)
 
 Crypto-tracker is a simple, robust command-line application that displays the price of popular cryptocurrencies.
 
-## Install
+### Install
 
 These installation instructions are written for a Linux system. If you have a different kind of
 computer, please amend the steps appropriately.
@@ -30,7 +30,21 @@ tar xzvf crypto-tracker_${RELEASE}_linux_amd64.tar.gz
 mv crypto /usr/local/bin/
 ```
 
-## Usage
+### Usage
 
-## Develop
+Crypto-tracker will eventually have a number of subcommands. Execute: `crypto --help` in order to check them out.
+
+#### track
+
+Track was initially intended for something like [Polybar for i3](https://github.com/polybar/polybar) to display the price of certain coins and their rise/fall in the past five minutes. It is inspired by [polybar-crypto](https://github.com/willHol/polybar-crypto).
+
+```bash
+crypto track --coin btc,eth
+
+£23852.33 | 3.56%  £782.73 | 5.43%
+```
+
+The track sub-command has a flag that needs to be set. The --coin, or -c for short, will allow you to specify which coins you wish to display.
+
+### Develop
 
