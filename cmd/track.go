@@ -17,11 +17,8 @@ package cmd
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
-	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/m7shapan/njson"
 	"github.com/spf13/cobra"
@@ -53,7 +50,7 @@ var trackCmd = &cobra.Command{
 }
 
 func checkCoins(c string) (string, error) {
-	data, err := queryApi(c)
+	data, err := api.query(c)
 	if err != nil {
 		return "An error has occured queying the API:", err
 	}
@@ -64,36 +61,6 @@ func checkCoins(c string) (string, error) {
 	}
 
 	return price, nil
-}
-
-func queryApi(c string) ([]byte, error) {
-	apiUrl := "https://api.coinranking.com/v1/public/coins?base=gbp&prefix=" + c
-	client := http.Client{
-		Timeout: time.Second * 2,
-	}
-
-	req, err := http.NewRequest(http.MethodGet, apiUrl, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "crypto-tracker")
-
-	res, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return body, nil
 }
 
 func grabPrice(body []byte) (string, error) {
@@ -114,19 +81,8 @@ func grabPrice(body []byte) (string, error) {
 
 	return s, nil
 }
-
 func init() {
 	rootCmd.AddCommand(trackCmd)
 	trackCmd.Flags().StringSliceVarP(&coinsArg, "coin", "c", []string{}, "")
 	trackCmd.MarkPersistentFlagRequired("coin")
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// trackCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// trackCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
