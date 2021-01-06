@@ -3,6 +3,7 @@ module github.com/jasonbirchall/crypto-tracker
 go 1.15
 
 require (
+	github.com/guptarohit/asciigraph v0.5.1
 	github.com/m7shapan/njson v1.0.1
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/spf13/cobra v1.1.1
