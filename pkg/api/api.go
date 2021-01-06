@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func query(c string) ([]byte, error) {
+func Query(c string) ([]byte, error) {
 	apiUrl := "https://api.coinranking.com/v1/public/coins?base=gbp&prefix=" + c
 	client := http.Client{
 		Timeout: time.Second * 2,

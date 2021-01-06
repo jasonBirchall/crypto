@@ -17,15 +17,12 @@ package cmd
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
-	"net/http"
 	"strconv"
-	"time"
 
+	api "github.com/jasonbirchall/crypto-tracker/pkg/api"
 	"github.com/m7shapan/njson"
 	"github.com/spf13/cobra"
-	// api "github.com/jasonbirchall/crypto-tracker/pkg/api"
 )
 
 type Coin struct {
@@ -54,7 +51,7 @@ var trackCmd = &cobra.Command{
 }
 
 func checkCoins(c string) (string, error) {
-	data, err := query(c)
+	data, err := api.Query(c)
 	if err != nil {
 		return "An error has occured queying the API:", err
 	}
@@ -84,36 +81,6 @@ func grabPrice(body []byte) (string, error) {
 	s := fmt.Sprintf("£%.2f | %.2f", v, c.Change)
 
 	return s, nil
-}
-
-func query(c string) ([]byte, error) {
-	apiUrl := "https://api.coinranking.com/v1/public/coins?base=gbp&prefix=" + c
-	client := http.Client{
-		Timeout: time.Second * 2,
-	}
-
-	req, err := http.NewRequest(http.MethodGet, apiUrl, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "crypto-tracker")
-
-	res, err := client.Do(req)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return body, nil
 }
 
 func init() {
