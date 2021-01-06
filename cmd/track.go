@@ -43,7 +43,7 @@ var trackCmd = &cobra.Command{
 				return err
 			}
 
-			fmt.Print(price + "%  ")
+			fmt.Print(price)
 		}
 
 		return nil
@@ -78,7 +78,7 @@ func grabPrice(body []byte) (string, error) {
 		log.Fatal(err)
 	}
 
-	s := fmt.Sprintf("£%.2f | %.2f", v, c.Change)
+	s := fmt.Sprintf("£%.2f | %.2f%%   ", v, c.Change)
 
 	return s, nil
 }
