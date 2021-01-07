@@ -17,14 +17,25 @@ package cmd
 
 import (
 	"fmt"
+	"math"
+	"reflect"
 
+	"github.com/guptarohit/asciigraph"
 	api "github.com/jasonbirchall/crypto-tracker/pkg/api"
 	"github.com/m7shapan/njson"
 	"github.com/spf13/cobra"
 )
 
 type Price struct {
-	History string `njson:"data.coins.0.history"`
+	DataPoint0 float64 `njson:"data.coins.0.history.18"`
+	DataPoint1 float64 `njson:"data.coins.0.history.19"`
+	DataPoint2 float64 `njson:"data.coins.0.history.20"`
+	DataPoint3 float64 `njson:"data.coins.0.history.21"`
+	DataPoint4 float64 `njson:"data.coins.0.history.22"`
+	DataPoint5 float64 `njson:"data.coins.0.history.23"`
+	DataPoint6 float64 `njson:"data.coins.0.history.24"`
+	DataPoint7 float64 `njson:"data.coins.0.history.25"`
+	DataPoint8 float64 `njson:"data.coins.0.history.26"`
 }
 
 var coin string
@@ -33,36 +44,46 @@ var coin string
 var graphCmd = &cobra.Command{
 	Use:   "graph",
 	Short: "Graphs the recent price points of a certain coin",
-	Run: func(cmd *cobra.Command, args []string) {
-		// data := []float64{3, 4, 9, 6, 2, 4, 5, 8, 5, 10, 2, 7, 2, 5, 6}
+	RunE: func(cmd *cobra.Command, args []string) error {
 		data, err := getData(coin)
-		// graph := asciigraph.Plot(data)
-		fmt.Println(data, err)
+		if err != nil {
+			return err
+		}
+		graph := asciigraph.Plot(data)
 
-		// fmt.Println(graph)
+		fmt.Println(graph)
+
+		return nil
 	},
 }
 
-func getData(coin string) (float64, error) {
+func getData(coin string) ([]float64, error) {
 	var c Price
+	var arr []float64
 
 	data, err := api.Query(coin)
 	if err != nil {
-		return -1, err
+		return arr, err
 	}
 
 	err = njson.Unmarshal([]byte(data), &c)
 	if err != nil {
-		return -1, err
+		return arr, err
 	}
 
-	fmt.Println(c.History)
-	for i, v := range c.History {
-		fmt.Println(i, v)
+	fields := reflect.TypeOf(c)
+	values := reflect.ValueOf(c)
+	num := fields.NumField()
+
+	for i := 0; i < num; i++ {
+		value := values.Field(i)
+		v := value.Interface().(float64)
+		c := math.Round(v*100) / 100
+
+		arr = append(arr, c)
 	}
 
-	return -1, nil
-
+	return arr, nil
 }
 
 func init() {
