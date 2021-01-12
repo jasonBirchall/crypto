@@ -52,6 +52,7 @@ type Price struct {
 }
 
 var coin string
+var height int
 
 // graphCmd represents the graph command. You can only return an error statement
 // using RunE.
@@ -64,7 +65,7 @@ var graphCmd = &cobra.Command{
 			return err
 		}
 
-		graph := asciigraph.Plot(data, asciigraph.Height(10))
+		graph := asciigraph.Plot(data, asciigraph.Height(height))
 
 		fmt.Println(graph)
 
@@ -109,5 +110,6 @@ func init() {
 	rootCmd.AddCommand(graphCmd)
 
 	graphCmd.Flags().StringVarP(&coin, "coin", "c", "", "Coin to place in graph")
+	graphCmd.Flags().IntVarP(&height, "height", "H", 10, "Height of the graph")
 	graphCmd.MarkFlagRequired("coin")
 }
