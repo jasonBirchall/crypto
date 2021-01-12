@@ -20,7 +20,7 @@ import (
 	"log"
 	"strconv"
 
-	api "github.com/jasonbirchall/crypto-tracker/pkg/api"
+	api "github.com/jasonbirchall/crypto-tracker/internal/api"
 	"github.com/m7shapan/njson"
 	"github.com/spf13/cobra"
 )
