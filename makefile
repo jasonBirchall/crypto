@@ -3,7 +3,7 @@ DOCKER_REPOSITORY := json0
 DOCKER_IMAGE_NAME := $(DOCKER_REPOSITORY)/$(NAME)
 GIT_COMMIT := $(shell git describe --dirty --always)
 SOURCE_FILES := $(shell find * -name '*.go')
-VERSION:=$(shell grep 'VERSION' pkg/version/version.go | awk '{ print $$4 }' | tr -d '"')
+VERSION:=$(shell grep 'VERSION' internal/version/version.go | awk '{ print $$4 }' | tr -d '"')
 EXTRA_RUN_ARGS?=
 
 crypto-tracker: $(SOURCE_FILES)
