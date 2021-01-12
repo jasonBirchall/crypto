@@ -36,7 +36,9 @@ Crypto-tracker will eventually have a number of subcommands. Execute: `crypto --
 
 #### Track
 
-Track was initially intended for something like [Polybar for i3](https://github.com/polybar/polybar) to display the price of certain coins and their rise/fall in the past five minutes. It is inspired by [polybar-crypto](https://github.com/willHol/polybar-crypto).
+Track was initially intended for something like [Polybar for i3](https://github.com/polybar/polybar) to display the price of certain coins and their rise/fall in the past five minutes. It is basically a go port of the [polybar-crypto](https://github.com/willHol/polybar-crypto) code base.
+
+The track sub-command has a flag that needs to be set. The `--coin`, or `-c` for short, will allow you to specify which coins you wish to display.
 
 ```bash
 crypto track --coin btc,eth
@@ -44,7 +46,30 @@ crypto track --coin btc,eth
 £23852.33 | 3.56%  £782.73 | 5.43%
 ```
 
-The track sub-command has a flag that needs to be set. The --coin, or -c for short, will allow you to specify which coins you wish to display.
+#### Graph
+
+Graph uses the same data set to display a coin in an ascii graph in the terminal. This command utilises [asciigraph](https://github.com/guptarohit/asciigraph), which does all the heavy lifting. 
+
+The graph sub-command requires you to specify a coin using the `--coin` or `-c` flag followed by a coin of your choice, for example:
+
+```bash
+crypto graph --coin btc -H 10
+
+ 26673 ┤           ╭──╮
+ 26369 ┤           │  ╰╮
+ 26065 ┤    ╭╮    ╭╯   ╰──╮
+ 25762 ┤    │╰╮ ╭─╯       │
+ 25458 ┤   ╭╯ ╰─╯         ╰╮
+ 25154 ┤  ╭╯               │
+ 24850 ┤  │                │
+ 24547 ┤ ╭╯                ╰─
+ 24243 ┤ │
+ 23939 ┼╮│
+ 23636 ┤╰╯
+
+```
+
+The `-H` or `--height` flag allows you to specify the height of the graph displayed.
 
 ### Develop
 
