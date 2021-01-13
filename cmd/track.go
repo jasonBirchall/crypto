@@ -18,6 +18,7 @@ package cmd
 import (
 	"fmt"
 	"log"
+	"math"
 	"strconv"
 
 	api "github.com/jasonbirchall/crypto-tracker/internal/api"
@@ -78,9 +79,14 @@ func grabPrice(body []byte) (string, error) {
 		log.Fatal(err)
 	}
 
-	s := fmt.Sprintf("£%.2f | %.2f%%   ", v, c.Change)
-
-	return s, nil
+	// Check to see if the difference is positive or negative. If
+	// positive then add a + symbol.
+	isNeg := math.Signbit(c.Change)
+	if isNeg {
+		return fmt.Sprintf("£%.2f | %.2f%%   ", v, c.Change), nil
+	} else {
+		return fmt.Sprintf("£%.2f | +%.2f%%   ", v, c.Change), nil
+	}
 }
 
 func init() {
