@@ -20,6 +20,7 @@ import (
 	"log"
 	"math"
 	"strconv"
+	"strings"
 
 	api "github.com/jasonbirchall/crypto-tracker/internal/api"
 	"github.com/m7shapan/njson"
@@ -44,7 +45,7 @@ var trackCmd = &cobra.Command{
 				return err
 			}
 
-			fmt.Print(price)
+			fmt.Print(strings.ToUpper(v)+" ", price)
 		}
 
 		return nil
