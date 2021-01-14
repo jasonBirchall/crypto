@@ -16,39 +16,15 @@ limitations under the License.
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
-	"math"
-	"reflect"
 
-	"github.com/guptarohit/asciigraph"
 	api "github.com/jasonbirchall/crypto-tracker/internal/api"
-	"github.com/m7shapan/njson"
 	"github.com/spf13/cobra"
 )
 
 type Price struct {
-	DataPoint5  float64 `njson:"data.coins.0.history.5"`
-	DataPoint6  float64 `njson:"data.coins.0.history.6"`
-	DataPoint7  float64 `njson:"data.coins.0.history.7"`
-	DataPoint8  float64 `njson:"data.coins.0.history.8"`
-	DataPoint9  float64 `njson:"data.coins.0.history.9"`
-	DataPoint10 float64 `njson:"data.coins.0.history.10"`
-	DataPoint11 float64 `njson:"data.coins.0.history.11"`
-	DataPoint12 float64 `njson:"data.coins.0.history.12"`
-	DataPoint13 float64 `njson:"data.coins.0.history.13"`
-	DataPoint14 float64 `njson:"data.coins.0.history.14"`
-	DataPoint15 float64 `njson:"data.coins.0.history.15"`
-	DataPoint16 float64 `njson:"data.coins.0.history.16"`
-	DataPoint17 float64 `njson:"data.coins.0.history.17"`
-	DataPoint18 float64 `njson:"data.coins.0.history.18"`
-	DataPoint19 float64 `njson:"data.coins.0.history.19"`
-	DataPoint20 float64 `njson:"data.coins.0.history.20"`
-	DataPoint21 float64 `njson:"data.coins.0.history.21"`
-	DataPoint22 float64 `njson:"data.coins.0.history.22"`
-	DataPoint23 float64 `njson:"data.coins.0.history.23"`
-	DataPoint24 float64 `njson:"data.coins.0.history.24"`
-	DataPoint25 float64 `njson:"data.coins.0.history.25"`
-	DataPoint26 float64 `njson:"data.coins.0.history.26"`
+	DataPoints []string `json:"datapoints"`
 }
 
 var coin string
@@ -65,45 +41,54 @@ var graphCmd = &cobra.Command{
 			return err
 		}
 
-		graph := asciigraph.Plot(data, asciigraph.Height(height))
+		// graph := asciigraph.Plot(data, asciigraph.Height(height))
 
-		fmt.Println(graph)
+		fmt.Println(data)
 
 		return nil
 	},
 }
 
-// getCoin takes a string as an argument, this is passed as a flag by the
+// getData takes a string as an argument, this is passed as a flag by the
 // graph command. It queries the API package and collates a collection of
 // float64 data type. This collection is then returned back to the command
 // function.
-func getData(coin string) ([]float64, error) {
-	var c Price
-	var arr []float64
+func getData(coin string) ([]string, error) {
+	var p Price
+	var arr []string
 
 	data, err := api.Query(coin)
+
+	err = json.Unmarshal(data, &p)
 	if err != nil {
 		return arr, err
 	}
 
-	err = njson.Unmarshal([]byte(data), &c)
-	if err != nil {
-		return arr, err
-	}
-
-	fields := reflect.TypeOf(c)
-	values := reflect.ValueOf(c)
-	num := fields.NumField()
-
-	for i := 0; i < num; i++ {
-		value := values.Field(i)
-		v := value.Interface().(float64)
-		c := math.Round(v*100) / 100
-
-		arr = append(arr, c)
+	for _, v := range p.DataPoints {
+		fmt.Println(v)
 	}
 
 	return arr, nil
+}
+
+func (p *Price) UnmarshalJSON(data []byte) error {
+	var v struct {
+		Data struct {
+			Coins []struct {
+				History []string `json:"history"`
+			} `json:"coins"`
+		} `json:"data"`
+	}
+
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+
+	if len(v.Data.Coins) > 0 {
+		p.DataPoints = v.Data.Coins[0].History
+	}
+
+	return nil
 }
 
 func init() {
