@@ -1,0 +1,17 @@
+name: crypto
+version: git
+summary: Command line crytocurrency tracker
+description: |
+  Crypto-tracker is a simple, robust command-line application that displays the price of popular cryptocurrencies.
+confinement: devmode
+base: core20
+parts:
+  crypto:
+    plugin: go
+    source: .
+    source-type: git
+    build-packages:
+      - gcc
+# apps:
+#   crypto-tracker:
+#     command: crypto
