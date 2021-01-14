@@ -18,7 +18,10 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"math"
+	"strconv"
 
+	"github.com/guptarohit/asciigraph"
 	api "github.com/jasonbirchall/crypto-tracker/internal/api"
 	"github.com/spf13/cobra"
 )
@@ -41,9 +44,9 @@ var graphCmd = &cobra.Command{
 			return err
 		}
 
-		// graph := asciigraph.Plot(data, asciigraph.Height(height))
+		graph := asciigraph.Plot(data, asciigraph.Height(height))
 
-		fmt.Println(data)
+		fmt.Println(graph)
 
 		return nil
 	},
@@ -53,9 +56,9 @@ var graphCmd = &cobra.Command{
 // graph command. It queries the API package and collates a collection of
 // float64 data type. This collection is then returned back to the command
 // function.
-func getData(coin string) ([]string, error) {
+func getData(coin string) ([]float64, error) {
 	var p Price
-	var arr []string
+	var arr []float64
 
 	data, err := api.Query(coin)
 
@@ -64,8 +67,17 @@ func getData(coin string) ([]string, error) {
 		return arr, err
 	}
 
+	// Iterate over all strings in struct and convert to float64, which
+	// is requried by the asciigraph package.
 	for _, v := range p.DataPoints {
-		fmt.Println(v)
+		s, err := strconv.ParseFloat(v, 64)
+		if err != nil {
+			return arr, err
+		}
+
+		r := math.Round(s*100) / 100
+
+		arr = append(arr, r)
 	}
 
 	return arr, nil
