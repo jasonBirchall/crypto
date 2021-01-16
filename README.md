@@ -1,6 +1,6 @@
 <p align="center">
-  <h2 align="center">Crypto Tracker</h2>
-  <p align="center">Cryptocurrency coin tracker written in Go</p>
+  <h2 align="center">Crypto CLI</h2>
+  <p align="center">Cryptocurrency coin command-line tool written in Go</p>
 </p>
 
 ---
