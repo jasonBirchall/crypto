@@ -22,7 +22,7 @@ func Query(c string) ([]byte, error) {
 
 	res, err := client.Do(req)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Unable to contact coinranking API")
 	}
 
 	if res.Body != nil {
