@@ -11,6 +11,7 @@
 [![GitHub release](https://img.shields.io/github/release/jasonbirchall/crypto.svg)](https://GitHub.com/jasonbirchall/crypto/releases/)
 [![GitHub issues](https://img.shields.io/github/issues/jasonbirchall/crypto.svg)](https://GitHub.com/jasonbirchall/crypto/issues/)
 [![tests](https://github.com/jasonbirchall/crypto//workflows/Run%20Tests/badge.svg)](https://github.com/jasonBirchall/crypto/actions?query=workflow%3A%22Run+Tests%22)
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/crypto)
 
 Crypto is a simple, robust command-line application that displays the price of popular cryptocurrencies.
 
