@@ -43,7 +43,7 @@ The track sub-command has a flag that needs to be set. The `--coin`, or `-c` for
 ```bash
 crypto track --coin btc,eth
 
-£23852.33 | 3.56%  £782.73 | 5.43%
+BTC £26332.21 | -2.57%   ETH £905.26 | -0.8%
 ```
 
 #### Graph
