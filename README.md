@@ -12,7 +12,7 @@
 [![GitHub release](https://img.shields.io/github/release/jasonbirchall/crypto.svg)](https://GitHub.com/jasonbirchall/crypto/releases/)
 [![GitHub issues](https://img.shields.io/github/issues/jasonbirchall/crypto.svg)](https://GitHub.com/jasonbirchall/crypto/issues/)
 [![tests](https://github.com/jasonbirchall/crypto//workflows/tests/badge.svg)](https://github.com/jasonBirchall/crypto/actions?query=workflow%3A%22tests%22)
-[![codeql](https://github.com/jasonbirchall/crypto//workflows/codeql/badge.svg)](https://github.com/jasonBirchall/crypto/actions?query=workflow%3ACodeQL)
+[![CodeQL](https://github.com/jasonbirchall/crypto//workflows/CodeQL/badge.svg)](https://github.com/jasonBirchall/crypto/actions?query=workflow%3ACodeQL)
 
 
 
