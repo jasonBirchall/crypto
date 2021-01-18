@@ -53,10 +53,6 @@ snapcrafts:
     # Values are the respective replacements.
     # Default is empty.
     replacements:
-      amd64: 64-bit
-      386: 32-bit
-      darwin: macOS
-      linux: Tux
 
     # The name of the snap. This is optional.
     # Default is project name.
@@ -128,7 +124,7 @@ snapcrafts:
 
         # You can override the command name.
         # Defaults is the app name.
-        command: bin/crypto-tracker
+        command: bin/crypto
 
         # Restart condition of the snap.
         # Defaults to empty.
