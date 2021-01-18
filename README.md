@@ -15,12 +15,16 @@
 [![codeql](https://github.com/jasonbirchall/crypto//workflows/codeql/badge.svg)](https://github.com/jasonBirchall/crypto/actions?query=workflow%3ACodeQL)
 
 
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/crypto)
 
 Crypto is a simple, robust command-line application that displays the price of popular cryptocurrencies.
 
 ### Install
 
+#### Snap
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/crypto)
+
+#### Manual
 These installation instructions are written for a Linux system. If you have a different kind of
 computer, please amend the steps appropriately.
 
