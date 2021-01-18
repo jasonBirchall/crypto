@@ -52,7 +52,6 @@ snapcrafts:
     # Keys should be valid GOOSs or GOARCHs.
     # Values are the respective replacements.
     # Default is empty.
-    replacements:
 
     # The name of the snap. This is optional.
     # Default is project name.
@@ -106,7 +105,7 @@ snapcrafts:
     # project directory. Destination filenames are relative to the snap prime
     # directory.
     # Default is empty.
-    extra_files:
+    # extra_files:
 
     # Each binary built by GoReleaser is an app inside the snap. In this section
     # you can declare extra details for those binaries. It is optional.
@@ -124,7 +123,7 @@ snapcrafts:
 
         # You can override the command name.
         # Defaults is the app name.
-        command: bin/crypto
+        # command: bin/crypto
 
         # Restart condition of the snap.
         # Defaults to empty.
