@@ -4,9 +4,6 @@ on:
   release:
     types:
       - created
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
-      - '**/v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   build:
@@ -14,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Pull new module version
-      uses: andrewslotin/go-proxy-pull-action@master
+      uses: andrewslotin/go-proxy-pull-action@1.0.1
