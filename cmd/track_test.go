@@ -9,6 +9,8 @@ import (
 
 const mainGo = "../main.go"
 
+// TestTestExecute tests the execution command defined by the out variable. This should output a
+// a string that contains a "£" sign.
 func TestExecute(t *testing.T) {
 
 	out, err := exec.Command("go", "run", mainGo, "track", "-c", "btc,eth").Output()
@@ -28,6 +30,7 @@ func TestExecute(t *testing.T) {
 	}
 }
 
+// TestTestCheckCoins confirms the checkCoins function works as expected.
 func TestCheckCoins(t *testing.T) {
 	coin := "btc"
 	check, err := checkCoins(coin)

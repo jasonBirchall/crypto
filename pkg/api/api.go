@@ -1,3 +1,5 @@
+// Package api allows users to query a popular coin ranking API's
+// which is used in various commands.
 package api
 
 import (
@@ -7,6 +9,8 @@ import (
 	"time"
 )
 
+// Query takes a coin shorthand value as a string and queries an endpoint.
+// It outputs a slice of bytes and an error value if there is one.
 func Query(c string) ([]byte, error) {
 	apiUrl := "https://api.coinranking.com/v1/public/coins?base=gbp&prefix=" + c
 	client := http.Client{

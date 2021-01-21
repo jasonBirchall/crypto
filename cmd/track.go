@@ -27,11 +27,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Coin defines the current price rate of a coin and subsequently
+// a change in rate using a float value.
 type Coin struct {
 	Rate   string  `njson:"data.coins.0.price"`
 	Change float64 `njson:"data.coins.0.change"`
 }
 
+// coinsArg is gathered using the --coin or -c flag.
 var coinsArg []string
 
 var trackCmd = &cobra.Command{
@@ -52,6 +55,10 @@ var trackCmd = &cobra.Command{
 	},
 }
 
+// checkCoins takes a coin shorthand as a string, i.e. btc and queries the
+// api package to retrieve a collection of bytes. It then calls grabPrice and
+// creates a Coin property. Finally, checkCoins will return a string to the main
+// Cobra command.
 func checkCoins(c string) (string, error) {
 	data, err := api.Query(c)
 	if err != nil {
@@ -66,6 +73,9 @@ func checkCoins(c string) (string, error) {
 	return price, nil
 }
 
+// grabPrice accepts a slice of bytes from the checkCoins function and unmarshalls it into
+// a coin object. This object is then converted to a float to show only two decimal places and
+// then returns the object values depending on if they're positive or negative.
 func grabPrice(body []byte) (string, error) {
 	var c Coin
 

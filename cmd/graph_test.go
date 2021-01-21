@@ -4,6 +4,8 @@ import (
 	"testing"
 )
 
+// TestTestGetData tests the getData function and confirms it returns a string
+// greater than 0 chars. If not, the test will fail.
 func TestGetData(t *testing.T) {
 	coin := "btc"
 
