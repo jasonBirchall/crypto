@@ -9,6 +9,9 @@ jobs:
     name: Renew documentation
     runs-on: ubuntu-latest
     steps:
-    - name: Run makefile
-      run: |
-        make update-pkg-cache
+      - name: Checkout PR code
+        uses: actions/checkout@master
+
+      - name: Run makefile
+        run: |
+          make update-pkg-cache
