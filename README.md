@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="GoReleaser Logo" src="images/logo_transparent.png" height="140" />
+  <img alt="GoReleaser Logo" src="images/logo" height="140" />
   <h2 align="center">Crypto CLI</h2>
   <p align="center">Cryptocurrency command-line tool written in Go</p>
 </p>
