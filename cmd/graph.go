@@ -26,10 +26,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// Price holds a slice of json values, this will be different prices over the past
+// 22 collected points from cointracker.com.
 type Price struct {
 	DataPoints []string `json:"datapoints"`
 }
 
+// coin and height are taken as command line arguments.
 var coin string
 var height int
 
@@ -83,6 +86,8 @@ func getData(coin string) ([]float64, error) {
 	return arr, nil
 }
 
+// UnmarshalJSON takes a slice of byte from the getData function and unmarshals
+// it into the Price struct.
 func (p *Price) UnmarshalJSON(data []byte) error {
 	var v struct {
 		Data struct {
@@ -103,6 +108,7 @@ func (p *Price) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// init adds the graph command and flags as per Cobra specification.
 func init() {
 	rootCmd.AddCommand(graphCmd)
 
