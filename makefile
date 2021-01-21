@@ -3,13 +3,13 @@ DOCKER_REPOSITORY := json0
 DOCKER_IMAGE_NAME := $(DOCKER_REPOSITORY)/$(NAME)
 GIT_COMMIT := $(shell git describe --dirty --always)
 SOURCE_FILES := $(shell find * -name '*.go')
-VERSION:=$(shell grep 'VERSION' internal/version/version.go | awk '{ print $$4 }' | tr -d '"')
+VERSION:=$(shell grep 'VERSION' pkg/version/version.go | awk '{ print $$4 }' | tr -d '"')
 EXTRA_RUN_ARGS?=
 
 crypto: $(SOURCE_FILES)
 	export GO111MODULE=on
 	go mod download
-	GIT_COMMIT=$$(git rev-list -1 HEAD) && CGO_ENABLED=0 go build  -ldflags "-s -w -X github.com/jasonbirchall/crypto/internal/version.REVISION=$(GIT_COMMIT)" -a -o ./crypto ./main.go
+	GIT_COMMIT=$$(git rev-list -1 HEAD) && CGO_ENABLED=0 go build  -ldflags "-s -w -X github.com/jasonbirchall/crypto/pkg/version.REVISION=$(GIT_COMMIT)" -a -o ./crypto ./main.go
 
 test:
 	go test -v ./...

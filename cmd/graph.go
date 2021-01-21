@@ -22,7 +22,7 @@ import (
 	"strconv"
 
 	"github.com/guptarohit/asciigraph"
-	api "github.com/jasonbirchall/crypto-tracker/internal/api"
+	api "github.com/jasonbirchall/crypto-tracker/pkg/api"
 	"github.com/spf13/cobra"
 )
 
