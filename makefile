@@ -22,4 +22,8 @@ release:
 	git tag $(VERSION)
 	git push origin $(VERSION)
 
+update-pkg-cache:
+	GOPROXY=https://proxy.golang.org GO111MODULE=on \
+  go get github.com/jasonbirchall/crypto@$(VERSION)
+
 .PHONY: test
