@@ -22,7 +22,7 @@ import (
 	"strconv"
 	"strings"
 
-	api "github.com/jasonbirchall/crypto-tracker/pkg/api"
+	api "github.com/jasonbirchall/crypto/pkg/api"
 	"github.com/m7shapan/njson"
 	"github.com/spf13/cobra"
 )
