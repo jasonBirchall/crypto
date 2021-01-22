@@ -1,3 +1,4 @@
+// Package cmd defines the commands setup using the Cobra library.
 package cmd
 
 import (
