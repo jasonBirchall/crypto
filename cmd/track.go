@@ -21,6 +21,7 @@ import (
 	"math"
 	"strconv"
 	"strings"
+	"time"
 
 	api "github.com/jasonbirchall/crypto/pkg/api"
 	"github.com/m7shapan/njson"
@@ -42,17 +43,49 @@ var trackCmd = &cobra.Command{
 	Short: "Allows you to track the rise and fall of specific coins",
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		for _, v := range coinsArg {
-			price, err := checkCoins(v)
-			if err != nil {
-				return err
-			}
-
-			fmt.Print(strings.ToUpper(v)+" ", price)
+		if watch {
+			doEvery(2000*time.Millisecond, loop)
+		} else {
+			execute()
 		}
-
 		return nil
 	},
+}
+
+func doEvery(d time.Duration, f func(time.Time)) {
+	for x := range time.Tick(d) {
+		f(x)
+	}
+}
+
+func loop(t time.Time) {
+	execute()
+}
+
+func execute() {
+	var s string
+	m, err := createMap()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for k, v := range m {
+		s = s + strings.ToUpper(k) + " " + v
+	}
+	fmt.Println(s)
+}
+
+func createMap() (map[string]string, error) {
+	m := make(map[string]string)
+	for _, v := range coinsArg {
+		price, err := checkCoins(v)
+		if err != nil {
+			return m, err
+		}
+		m[v] = price
+	}
+	return m, nil
+
 }
 
 // checkCoins takes a coin shorthand as a string, i.e. btc and queries the
