@@ -43,13 +43,10 @@ var trackCmd = &cobra.Command{
 	Short: "Allows you to track the rise and fall of specific coins",
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		// maybe? https://stackoverflow.com/questions/16466320/is-there-a-way-to-do-repetitive-tasks-at-intervals
 		if watch {
-			m, err := doEvery(20*time.Millisecond, execute())
-			if !err != nil {
-				return err
-			}
-			fmt.Print(m)
+			doEvery(2000*time.Millisecond, loop)
+		} else {
+			execute()
 		}
 		return nil
 	},
@@ -61,16 +58,21 @@ func doEvery(d time.Duration, f func(time.Time)) {
 	}
 }
 
-func execute() (string, error) {
+func loop(t time.Time) {
+	execute()
+}
+
+func execute() {
+	var s string
 	m, err := createMap()
 	if err != nil {
-		return "", err
+		fmt.Println(err)
 	}
 
 	for k, v := range m {
-		return fmt.Print(strings.ToUpper(k) + " " + v), err
+		s = s + strings.ToUpper(k) + " " + v
 	}
-	return "", nil
+	fmt.Println(s)
 }
 
 func createMap() (map[string]string, error) {
