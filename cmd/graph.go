@@ -52,7 +52,7 @@ var graphCmd = &cobra.Command{
 				if err != nil {
 					return err
 				}
-				tm.Println("Current Time:", time.Now().Format(time.RFC1123), "\nMeasuring:", coin, "\n")
+				tm.Println("Current Time:", time.Now().Format(time.RFC1123), "\nMeasuring:", coin)
 				tm.Println(g)
 				tm.Flush() // Call it every time at the end of rendering
 			}
