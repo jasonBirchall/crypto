@@ -23,6 +23,7 @@ import (
 	"strings"
 	"time"
 
+	tm "github.com/buger/goterm"
 	api "github.com/jasonbirchall/crypto/pkg/api"
 	"github.com/m7shapan/njson"
 	"github.com/spf13/cobra"
@@ -44,25 +45,30 @@ var trackCmd = &cobra.Command{
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if watch {
-			doEvery(2000*time.Millisecond, loop)
+			tm.Clear() // Clear current screen
+			for {
+				tm.MoveCursor(1, 1)
+				tm.Println("Current Time:", time.Now().Format(time.RFC1123), "\n-------------")
+				p, err := execute()
+				if err != nil {
+					return err
+				}
+				tm.Println(p)
+				tm.Flush() // Call it every time at the end of rendering
+				time.Sleep(time.Second)
+			}
 		} else {
-			execute()
+			p, err := execute()
+			if err != nil {
+				return err
+			}
+			fmt.Println(p)
 		}
 		return nil
 	},
 }
 
-func doEvery(d time.Duration, f func(time.Time)) {
-	for x := range time.Tick(d) {
-		f(x)
-	}
-}
-
-func loop(t time.Time) {
-	execute()
-}
-
-func execute() {
+func execute() (string, error) {
 	var s string
 	m, err := createMap()
 	if err != nil {
@@ -72,7 +78,8 @@ func execute() {
 	for k, v := range m {
 		s = s + strings.ToUpper(k) + " " + v
 	}
-	fmt.Println(s)
+
+	return s, nil
 }
 
 func createMap() (map[string]string, error) {
