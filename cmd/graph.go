@@ -20,7 +20,9 @@ import (
 	"fmt"
 	"math"
 	"strconv"
+	"time"
 
+	tm "github.com/buger/goterm"
 	"github.com/guptarohit/asciigraph"
 	api "github.com/jasonbirchall/crypto/pkg/api"
 	"github.com/spf13/cobra"
@@ -42,17 +44,37 @@ var graphCmd = &cobra.Command{
 	Use:   "graph",
 	Short: "Graphs the recent price points of a certain coin",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		data, err := getData(coin)
-		if err != nil {
-			return err
+		if watch {
+			for {
+				tm.Clear()
+				tm.MoveCursor(0, 0)
+				g, err := createGraph(coin)
+				if err != nil {
+					return err
+				}
+				tm.Println("Current Time:", time.Now().Format(time.RFC1123), "\nMeasuring:", coin, "\n")
+				tm.Println(g)
+				tm.Flush() // Call it every time at the end of rendering
+			}
+		} else {
+			g, err := createGraph(coin)
+			if err != nil {
+				return err
+			}
+			fmt.Println(g)
 		}
-
-		graph := asciigraph.Plot(data, asciigraph.Height(height))
-
-		fmt.Println(graph)
 
 		return nil
 	},
+}
+
+func createGraph(c string) (string, error) {
+	data, err := getData(coin)
+	if err != nil {
+		return "", err
+	}
+	graph := asciigraph.Plot(data, asciigraph.Height(height))
+	return graph, nil
 }
 
 // getData takes a string as an argument, this is passed as a flag by the
