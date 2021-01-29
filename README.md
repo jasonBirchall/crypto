@@ -20,6 +20,8 @@ Crypto is a simple, robust command-line application that displays the price of p
 
 ### Install
 
+#### Linux
+
 #### Snap
 
 ```bash
@@ -45,6 +47,10 @@ mv crypto /usr/local/bin/
 ### Usage
 
 Crypto will eventually have a number of subcommands. Execute: `crypto --help` in order to check them out.
+
+#### Flags
+
+A `--watch` flag is available for a number of commands, including track and graph, this allows you to loop the same command every second.
 
 #### Track
 
