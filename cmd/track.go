@@ -24,6 +24,7 @@ import (
 	"time"
 
 	tm "github.com/buger/goterm"
+	"github.com/fatih/color"
 	api "github.com/jasonbirchall/crypto/pkg/api"
 	"github.com/m7shapan/njson"
 	"github.com/spf13/cobra"
@@ -118,6 +119,8 @@ func checkCoins(c string) (string, error) {
 // then returns the object values depending on if they're positive or negative.
 func grabPrice(body []byte) (string, error) {
 	var c Coin
+	pos := color.New(color.FgGreen)
+	neg := color.New(color.FgRed)
 
 	err := njson.Unmarshal([]byte(body), &c)
 	if err != nil {
@@ -134,9 +137,9 @@ func grabPrice(body []byte) (string, error) {
 	// positive then add a + symbol.
 	isNeg := math.Signbit(c.Change)
 	if isNeg {
-		return fmt.Sprintf("£%.2f | %.2f%%   ", v, c.Change), nil
+		return neg.Sprintf("£%.2f | %.2f%%   ", v, c.Change), nil
 	} else {
-		return fmt.Sprintf("£%.2f | +%.2f%%   ", v, c.Change), nil
+		return pos.Sprintf("£%.2f | +%.2f%%   ", v, c.Change), nil
 	}
 }
 
