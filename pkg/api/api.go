@@ -19,14 +19,14 @@ func Query(c string) ([]byte, error) {
 
 	req, err := http.NewRequest(http.MethodGet, apiUrl, nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Panic(err)
 	}
 
 	req.Header.Set("User-Agent", "crypto-tracker")
 
 	res, err := client.Do(req)
 	if err != nil {
-		log.Fatal("Unable to contact coinranking API")
+		log.Panic("Unable to contact coinranking API")
 	}
 
 	if res.Body != nil {
@@ -35,7 +35,7 @@ func Query(c string) ([]byte, error) {
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		log.Fatal(err)
+		log.Panic(err)
 	}
 
 	return body, nil
