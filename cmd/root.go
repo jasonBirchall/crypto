@@ -12,9 +12,8 @@ import (
 
 var (
 	// Used for flags.
-	cfgFile     string
-	userLicense string
-	watch       bool
+	cfgFile string
+	watch   bool
 
 	rootCmd = &cobra.Command{
 		Use:   "crypto",
