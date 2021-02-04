@@ -14,6 +14,7 @@
 [![tests](https://github.com/jasonbirchall/crypto//workflows/tests/badge.svg)](https://github.com/jasonBirchall/crypto/actions?query=workflow%3A%22tests%22)
 [![CodeQL](https://github.com/jasonbirchall/crypto//workflows/CodeQL/badge.svg)](https://github.com/jasonBirchall/crypto/actions?query=workflow%3ACodeQL)
 [![crypto](https://snapcraft.io/crypto/badge.svg)](https://snapcraft.io/crypto)
+[![DeepSource](https://deepsource.io/gh/jasonBirchall/crypto.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/jasonBirchall/crypto/?ref=repository-badge)
 
 
 Crypto is a simple, robust command-line application that displays the price of popular cryptocurrencies.
