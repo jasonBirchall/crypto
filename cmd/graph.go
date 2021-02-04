@@ -86,6 +86,9 @@ func getData(coin string) ([]float64, error) {
 	var arr []float64
 
 	data, err := api.Query(coin)
+	if err != nil {
+		return arr, err
+	}
 
 	err = json.Unmarshal(data, &p)
 	if err != nil {

@@ -5,4 +5,5 @@ import "github.com/jasonbirchall/crypto/cmd"
 
 func main() {
 	cmd.Execute()
+
 }
