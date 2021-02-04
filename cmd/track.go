@@ -85,12 +85,12 @@ func execute() (string, error) {
 
 func createMap() (map[string]string, error) {
 	m := make(map[string]string)
-	for _, v := range coinsArg {
-		price, err := checkCoins(v)
+	for _, c := range coinsArg {
+		price, err := checkCoins(c)
 		if err != nil {
 			return m, err
 		}
-		m[v] = price
+		m[c] = price
 	}
 	return m, nil
 
