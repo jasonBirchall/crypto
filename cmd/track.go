@@ -46,17 +46,14 @@ var trackCmd = &cobra.Command{
 
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if watch {
-			tm.Clear() // Clear current screen
+			// Clear the current screen.
+			tm.Clear()
+			// Loop over track command, executing track command every second.
 			for {
-				tm.MoveCursor(1, 1)
-				tm.Println("Current Time:", time.Now().Format(time.RFC1123), "\n-------------")
-				p, err := execute()
+				err := loopTrack()
 				if err != nil {
 					return err
 				}
-				tm.Println(p)
-				tm.Flush() // Call it every time at the end of rendering
-				time.Sleep(time.Second)
 			}
 		} else {
 			p, err := execute()
@@ -69,11 +66,13 @@ var trackCmd = &cobra.Command{
 	},
 }
 
+// execute forms a map and loops its values to create a string to print.
+// An example of this would be BTC £12322 | +4.32%
 func execute() (string, error) {
 	var s string
 	m, err := createMap()
 	if err != nil {
-		fmt.Println(err)
+		return "An error occured creating a map:", err
 	}
 
 	for k, v := range m {
@@ -83,6 +82,25 @@ func execute() (string, error) {
 	return s, nil
 }
 
+// loopTrack is used to loop over the execute function every second. This function is
+// called if the --watch flag is set.
+func loopTrack() error {
+	tm.MoveCursor(1, 1)
+	tm.Println("Current Time:", time.Now().Format(time.RFC1123), "\n-------------")
+	p, err := execute()
+	if err != nil {
+		return err
+	}
+	tm.Println(p)
+	// Call it every time at the end of rendering
+	tm.Flush()
+	time.Sleep(time.Second)
+
+	return nil
+}
+
+// createMap takes no arguments and calls checkCoins to query an API.
+// It returns a map of coin(string): price(string).
 func createMap() (map[string]string, error) {
 	m := make(map[string]string)
 	for _, c := range coinsArg {
