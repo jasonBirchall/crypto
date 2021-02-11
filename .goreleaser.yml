@@ -134,10 +134,10 @@ snapcrafts:
     # Default is empty.
 
 dockers:
-  - goos: linux
-    goarch: amd64
-    goarm: ''
-  - image_templates:
+  goos: linux
+  goarch: amd64
+  goarm: ''
+  image_templates:
     - "json0/crypto:latest"
     - "json0/crypto:{ .Tag }"
   dockerfile: Dockerfile
