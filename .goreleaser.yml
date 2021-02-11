@@ -133,6 +133,14 @@ snapcrafts:
     # require this.
     # Default is empty.
 
+dockers:
+  - goos: linux
+    goarch: amd64
+    goarm: ''
+  - image_templates:
+    - json0/crypto:latest
+    - json0/crypto:{ .Tag }
+  dockerfile: Dockerfile
 # - image_templates:
 #   - 'goreleaser/goreleaser:{{ .Tag }}-amd64'
 #   - 'ghcr.io/goreleaser/goreleaser:{{ .Tag }}-amd64'
