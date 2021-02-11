@@ -138,8 +138,8 @@ dockers:
     goarch: amd64
     goarm: ''
   - image_templates:
-    - json0/crypto:latest
-    - json0/crypto:{ .Tag }
+    - "json0/crypto:latest"
+    - "json0/crypto:{ .Tag }"
   dockerfile: Dockerfile
 # - image_templates:
 #   - 'goreleaser/goreleaser:{{ .Tag }}-amd64'
