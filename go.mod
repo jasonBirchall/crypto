@@ -7,7 +7,7 @@ require (
 	github.com/fatih/color v1.10.0
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20200217142428-fce0ec30dd00 // indirect
-	github.com/guptarohit/asciigraph v0.5.1
+	github.com/guptarohit/asciigraph v0.5.2
 	github.com/kr/text v0.2.0 // indirect
 	github.com/m7shapan/njson v1.0.3
 	github.com/magiconair/properties v1.8.4 // indirect
