@@ -55,6 +55,7 @@ brews:
       owner: jasonbirchall
       name: homebrew-tap
     homepage: https://github.com/jasonBirchall/crypto
+    folder: Formula
     description: Cryptocurrency tracker for the command line.
     license: Apache-2.0
     dependencies:
