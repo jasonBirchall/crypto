@@ -50,3 +50,12 @@ snapcrafts:
     apps:
       crypto:
         plugs: ["network"]
+brews:
+  - tap:
+      owner: jasonbirchall
+      name: homebrew-tap
+    homepage: https://github.com/jasonBirchall/crypto
+    description: Cryptocurrency tracker for the command line.
+    license: Apache-2.0
+    dependencies:
+    - name: go
