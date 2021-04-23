@@ -53,10 +53,10 @@ snapcrafts:
 brews:
   - tap:
       owner: jasonbirchall
-      name: homebrew-tap
+      name: homebrew-crypto-tap
     homepage: https://github.com/jasonBirchall/crypto
     folder: Formula
-    description: Cryptocurrency tracker for the command line.
+    description: Cryptocurrency tracker for the command-line.
     license: Apache-2.0
     dependencies:
     - name: go
