@@ -54,6 +54,7 @@ brews:
   - tap:
       owner: jasonbirchall
       name: homebrew-crypto-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     homepage: https://github.com/jasonBirchall/crypto
     folder: Formula
     description: Cryptocurrency tracker for the command-line.
