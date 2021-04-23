@@ -21,9 +21,17 @@ Crypto is a simple, robust command-line application that displays the price of p
 
 ### Install
 
+#### Mac
+
+##### Brew tap
+
+```bash
+brew install jasonBirchall/crypto-tap/crypto
+```
+
 #### Linux
 
-#### Snap
+##### Snap
 
 ```bash
 sudo snap install crypto
@@ -67,7 +75,7 @@ BTC £26332.21 | -2.57%   ETH £905.26 | -0.8%
 
 #### Graph
 
-Graph uses the same data set to display a coin in an ascii graph in the terminal. This command utilises [asciigraph](https://github.com/guptarohit/asciigraph), which does all the heavy lifting. 
+Graph uses the same data set to display a coin in an ascii graph in the terminal. This command utilises [asciigraph](https://github.com/guptarohit/asciigraph), which does all the heavy lifting.
 
 The graph sub-command requires you to specify a coin using the `--coin` or `-c` flag followed by a coin of your choice, for example:
 
