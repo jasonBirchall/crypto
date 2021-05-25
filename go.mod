@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/buger/goterm v0.0.0-20200322175922-2f3e71b85129
-	github.com/fatih/color v1.10.0
+	github.com/fatih/color v1.12.0
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20200217142428-fce0ec30dd00 // indirect
 	github.com/guptarohit/asciigraph v0.5.2
